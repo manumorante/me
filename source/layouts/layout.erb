@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" ng-app="manu">
+<head><%= partial 'layouts/head' %></head>
+<body ng-controller="MainCtrl">
+<div class="container">
+  <%= partial 'layouts/header' %>
+
+  <ng-view>
+    <h3>Loading ...</h3>
+  </ng-view>
+
+  <footer>© Copyright Manu Morante</footer>
+</div>
+<%= partial 'layouts/footer' %>
+<%= javascript_include_tag  'application' %>
+</body>
+</html>

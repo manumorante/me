@@ -7,7 +7,11 @@ set :js_dir, 'js'
 set :images_dir, 'img'
 set :fonts__dir, 'fonts'
 set :relative_links, true
-# set :partials_dir, 'layouts/_partials'
+
+activate :angular_templates
+
+# Disable view's layout
+page '/views/*', :layout => false
 
 
 

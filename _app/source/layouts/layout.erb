@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" ng-app="manu">
+<head><%= partial 'layouts/partials/head' %></head>
+<body class="<%= page_classes %>" ng-controller="MainCtrl">
+<div class="container">
+  <%= partial 'layouts/partials/header' %>
+  <%= yield %>
+  <%= angular_include_templates %>
+</div>
+<%= partial 'layouts/partials/footer' %>
+<%= javascript_include_tag  'application' %>
+</body>
+</html>

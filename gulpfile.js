@@ -7,8 +7,9 @@ var gulp          = require('gulp'),
     connect       = require('gulp-connect'),
     compass       = require('gulp-compass'),
     uglify        = require('gulp-uglify'),
-    deploy        = require('gulp-gh-pages'),
-    del           = require('del');
+    del           = require('del'),
+    runSequence   = require('run-sequence');
+
 
 
 /**
@@ -46,13 +47,25 @@ gulp.task('images', function() {
 
 
 /**
+ * Fonts
+ */
+gulp.task('fonts', function() {
+  gulp.src([assets +'/fonts/*.*'])
+    .pipe(gulp.dest(build_dir +'/assets'));
+});
+
+
+/**
  * CSS
  * - Compile and compress global styles using Compass.
  * - Copy result 'global.css' file within each folder slide.
  */
 gulp.task('styles', function () {
-  return gulp.src(sass_dir +'/application.scss')
+  gulp.src(sass_dir +'/application.scss')
     .pipe(compass({ config_file: 'source/config/compass.rb', sass: sass_dir, css: css_dir }));
+
+  gulp.src(['node_modules/font-awesome/css/font-awesome.css.map'])
+    .pipe(gulp.dest(build_dir +'/assets'));
 });
 
 
@@ -67,12 +80,21 @@ gulp.task('scripts', function () {
     'node_modules/jquery/dist/jquery.min.js',
     'node_modules/angular/angular.min.js',
     'node_modules/angular-route/angular-route.min.js',
-    'node_modules/bootstrap/dist/js/bootstrap.min.js',
-    js_dir +'/application.js'
+    js_dir +'/lib/bootstrap.min.js',
+    js_dir +'/lib/instafeed.js',
+    js_dir +'/ui/app.js',
+    js_dir +'/controllers/*.js',
+
+    js_dir +'/ui/instafeed.js',
+    js_dir +'/ui/modal.js',
+    js_dir +'/ui/loading.js',
+    js_dir +'/ui/polaroids.js'
   ])
     .pipe(concat('application.js'))
-    .pipe(uglify({ mangle: false }))
+    //.pipe(uglify({ mangle: false }))
     .pipe(gulp.dest(build_dir+ '/assets'));
+
+
 
   // Modernizr & RespondJS
   gulp.src([
@@ -81,6 +103,14 @@ gulp.task('scripts', function () {
   ])
     .pipe(concat('modernizr-respond.js'))
     .pipe(uglify({ mangle: false }))
+    .pipe(gulp.dest(build_dir+ '/assets'));
+
+
+
+  // Sourcempas
+  gulp.src([
+    'node_modules/angular-route/angular-route.min.js.map'
+  ])
     .pipe(gulp.dest(build_dir+ '/assets'));
 });
 
@@ -91,7 +121,9 @@ gulp.task('scripts', function () {
 gulp.task('watch', function () {
   gulp.watch( scss_files, ['styles'] );
   gulp.watch( images_dir +'/*.*', ['images'] );
-  gulp.watch( js_dir +'/*.*', ['scripts'] );
+  gulp.watch( js_dir +'/**/*.*', ['scripts'] );
+  gulp.watch( 'source/*.html', ['html'] );
+  gulp.watch( 'source/views/*.html', ['html'] );
 });
 
 
@@ -110,26 +142,26 @@ gulp.task('connect', function () {
  * Clean
  */
 gulp.task('clean', function() {
-  del([ 'build'])
+  del(['build'])
 });
 
 
 /**
  * Build
  */
-gulp.task('build', [ 'html', 'styles', 'scripts', 'images' ]);
-
-
-/**
- * Deploy
- */
-gulp.task('deploy', ['build'], function () {
-  return gulp.src('./build/**/*')
-    .pipe(deploy());
+gulp.task('build', ['clean'], function (cb) {
+  runSequence([
+    'html',
+    'styles',
+    'scripts',
+    'images',
+    'fonts'
+  ], cb);
 });
+
 
 
 /**
  * Default
  */
-gulp.task('default', [ 'build', 'connect', 'watch' ]);
+gulp.task('default', ['build', 'connect', 'watch']);

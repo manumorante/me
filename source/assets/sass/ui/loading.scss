@@ -1,0 +1,27 @@
+/**
+ * Loading
+ */
+
+@import "compass";
+@import "../config";
+
+#loading{
+  display: none;
+
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: $z-index-loading;
+  text-align: center;
+
+
+  p{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
+}
+
+body.loading #loading {
+  display: table;
+}

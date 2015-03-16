@@ -1,11 +1,20 @@
 // Application
 
+@import 'config';
+
 // Libs
-@import "lib/bootstrap";
+@import 'lib/bootstrap.scss';
+@import 'lib/font-awesome.scss';
 
 // Modules
-@import "ui/header";
+@import 'ui/main';
+@import 'ui/modal';
+@import 'ui/loading';
 
-// Pages
-@import "ui/home";
+// Page Polaroids
+@import 'ui/polaroids';
+@import 'ui/polaroid';
+@import 'ui/polaroid__caption';
+@import 'ui/polaroid__close';
+
 

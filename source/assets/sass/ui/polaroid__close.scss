@@ -1,0 +1,38 @@
+/**
+ * Polaroid Close button
+ */
+@import "compass";
+@import "../config";
+
+.polaroid .close {
+  display: none;
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  z-index: $z-index-polaroid-close;
+
+  width: 15px;
+  height: 14px;
+  border: 1px solid white;
+  @include border-radius(50%);
+  background-color: black;
+  @include hide-text;
+  pointer-events: all;
+
+  &:after {
+    position: absolute;
+    top: 0;
+    left: 3px;
+
+    display: block;
+    content: '+';
+    text-indent: 0px;
+    color: white;
+    font-size: 13px;
+    @include transform(rotate(45deg));
+  }
+}
+
+.polaroid.active .close {
+  display: block;
+}

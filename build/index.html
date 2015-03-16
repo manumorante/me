@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en" ng-app="manu">
+<html class="no-js" lang="en" ng-app="app">
 
 <head>
   <meta charset="utf-8">
@@ -8,30 +8,47 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href="assets/application.css" media="screen" rel="stylesheet" type="text/css" />
-  <script src="assets/modernizr-respond.min.js" type="text/javascript"></script>
+  <link href="assets/application.css" media="screen" rel="stylesheet" type="text/css"/>
+  <script src="assets/modernizr-respond.js" type="text/javascript"></script>
 </head>
 
 <body class="index" ng-controller="MainCtrl">
+
+
+<nav class="navbar navbar-default">
   <div class="container">
-    <div class="btn-group">
-      <a class="btn btn-default" href="#/home">Home</a>
-      <a class="btn btn-default" href="#/team">Team</a>
-      <a class="btn btn-default" href="#/contact">Contact</a>
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+              aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="fa fa-globe"></span></a>
     </div>
 
-    <ng-view>
-      <h3>Loading ...</h3>
-    </ng-view>
+    <div id="navbar" class="navbar-collapse collapse" ng-controller="HeaderCtrl">
+      <ul class="nav navbar-nav">
+        <li ng-class="{ active: isActive('/') }"><a href="/">Home</a></li>
+        <li ng-class="{ active: isActive('/polaroids') }"><a href="#/polaroids">Polaroids</a></li>
+        <li ng-class="{ active: isActive('/contact') }"><a href="#/contact">Contact</a></li>
+      </ul>
+    </div>
+
   </div>
 
-  <footer>
-    <div class="container">
-      <hr>
-      <p>&copy; 2015 Manu Morante</p>
-    </div>
-  </footer>
+</nav>
 
-  <script src="assets/application.js" type="text/javascript"></script>
+<ng-view>
+  <h3>Loading ...</h3>
+</ng-view>
+
+
+<footer>
+  <div class="container">
+    <hr>
+    <p>&copy; 2015 Manu Morante</p>
+  </div>
+</footer>
+
+<script src="assets/application.js" type="text/javascript"></script>
 </body>
 </html>

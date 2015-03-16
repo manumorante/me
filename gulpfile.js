@@ -17,7 +17,7 @@ var gulp          = require('gulp'),
  */
 var build_dir         = 'build',
     assets            = 'source/assets',
-    css_dir           = build_dir +'/assets/css',
+    css_dir           = build_dir +'/assets',
     images_dir        = assets +'/images',
     sass_dir          = assets +'/sass',
     scss_files        = sass_dir +'/**/*.scss',
@@ -25,7 +25,7 @@ var build_dir         = 'build',
 
 
 /**
- * HTML
+ * HTML files
  */
 gulp.task('html', function() {
   gulp.src(['source/*.html'])
@@ -41,7 +41,7 @@ gulp.task('html', function() {
  */
 gulp.task('images', function() {
   gulp.src([images_dir +'/*.jpg', images_dir +'/*.png'])
-    .pipe(gulp.dest(build_dir +'/assets/images'));
+    .pipe(gulp.dest(build_dir +'/assets'));
 });
 
 
@@ -64,18 +64,24 @@ gulp.task('styles', function () {
 */
 gulp.task('scripts', function () {
   gulp.src([
-    js_dir +'/lib/jquery.min.js',
-    js_dir +'/lib/angular.min.js',
-    js_dir +'/lib/angular-route.min.js',
-    js_dir +'/lib/bootstrap.min.js',
+    'node_modules/jquery/dist/jquery.min.js',
+    'node_modules/angular/angular.min.js',
+    'node_modules/angular-route/angular-route.min.js',
+    'node_modules/bootstrap/dist/js/bootstrap.min.js',
     js_dir +'/application.js'
   ])
     .pipe(concat('application.js'))
-    //.pipe(uglify({ mangle: false }))
-    .pipe(gulp.dest(build_dir+ '/assets/js'));
+    .pipe(uglify({ mangle: false }))
+    .pipe(gulp.dest(build_dir+ '/assets'));
 
-  gulp.src([js_dir +'/lib/modernizr-respond.min.js'])
-    .pipe(gulp.dest(build_dir+ '/assets/js'));
+  // Modernizr & RespondJS
+  gulp.src([
+    'node_modules/gulp-modernizr/build/modernizr-custom.js',
+    'node_modules/respond.js/dest/respond.min.js'
+  ])
+    .pipe(concat('modernizr-respond.js'))
+    .pipe(uglify({ mangle: false }))
+    .pipe(gulp.dest(build_dir+ '/assets'));
 });
 
 
@@ -95,8 +101,7 @@ gulp.task('watch', function () {
  */
 gulp.task('connect', function () {
   connect.server({
-    root: 'build',
-    port: 3000
+    root: 'build', port: 3000
   });
 });
 

@@ -4,10 +4,6 @@
 @import "compass";
 @import "../config";
 
-body.polaroids {
-  background: #f5f5f5 image-url('Wood_floor_by_gnrbishop.jpg') center top repeat;
-}
-
 #polaroids {
   position: relative;
   padding: $margin;

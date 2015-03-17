@@ -9275,10 +9275,6 @@ body.loading #loading {
 /**
  * Polaroids placeholder
  */
-body.polaroids {
-  background: #f5f5f5 url('Wood_floor_by_gnrbishop.jpg') center top repeat;
-}
-
 #polaroids {
   position: relative;
   padding: 15px;

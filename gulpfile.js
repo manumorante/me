@@ -1,96 +1,102 @@
-var gulp          = require('gulp'),
-    watch         = require('gulp-watch'),
-    concat        = require('gulp-concat'),
-    connect       = require('gulp-connect'),
-    compass       = require('gulp-compass'),
-    uglify        = require('gulp-uglify'),
-    del           = require('del');
+var _             = require('gulp'),
+  watch           = require('gulp-watch'),
+  concat          = require('gulp-concat'),
+  connect         = require('gulp-connect'),
+  compass         = require('gulp-compass'),
+  uglify          = require('gulp-uglify'),
+  del             = require('del'),
 
-
-
-// Config
-var build_dir         = 'build',
-    assets            = 'source/assets',
-    css_dir           = build_dir +'/assets',
-    images_dir        = assets +'/images',
-    sass_dir          = assets +'/sass',
-    scss_files        = sass_dir +'/**/*.scss',
-    js_dir            = assets +'/js';
-
+  c = {
+    source: {
+      dir:          'source',
+      assets:       'source/assets',
+      js:           'source/assets/js',
+      sass:         'source/assets/sass',
+      images:       'source/assets/images',
+      fonts:        'source/assets/fonts'
+    },
+    build: {
+      dir:          'build',
+      assets:       'build/assets',
+      js:           'build/assets/js',
+      css:          'build/assets/css',
+      images:       'build/assets/images',
+      fonts:        'build/assets/fonts'
+    }
+  };
 
 // HTML
-gulp.task('html', function() {
-  gulp.src(['source/**/*.html']).pipe(gulp.dest(build_dir));
+_.task('html', function(){
+  _.src(c.source.dir +'/**/*.html').pipe(_.dest(c.build.dir));
 });
 
 
 // Images
-gulp.task('images', function() {
-  gulp.src(images_dir +'/*.*').pipe(gulp.dest(build_dir +'/assets'));
+_.task('images', function(){
+  _.src(c.source.images + '/*.*').pipe(_.dest(c.build.images));
 });
 
 
 // Fonts
-gulp.task('fonts', function() {
-  gulp.src(assets +'/fonts/*.*').pipe(gulp.dest(build_dir +'/assets'));
+_.task('fonts', function(){
+  _.src(c.source.fonts +'/**/*.*').pipe(_.dest(c.build.fonts));
 });
 
 
 // CSS
-gulp.task('styles', function () {
-  gulp.src(sass_dir +'/application.scss')
-    .pipe(compass({ config_file: 'source/config/compass.rb', sass: sass_dir, css: css_dir }));
+_.task('styles', function(){
+  _.src(c.source.sass +'/application.scss')
+    .pipe(compass({config_file: c.source.dir +'/config/compass.rb', sass: c.source.sass, css: c.build.css}));
 });
 
 
 //  Javascript
-gulp.task('scripts', function () {
-  gulp.src([
-    js_dir +'/lib/jquery.min.js',
-    js_dir +'/lib/angular.min.js',
-    js_dir +'/lib/angular-route.min.js',
-    js_dir +'/lib/bootstrap.min.js',
-    js_dir +'/lib/instafeed.js',
-    js_dir +'/app.js',
-    js_dir +'/controllers/*.js',
+_.task('scripts', function(){
+  _.src([
+    c.source.js + '/lib/jquery.min.js',
+    c.source.js + '/lib/angular.min.js',
+    c.source.js + '/lib/angular-route.min.js',
+    c.source.js + '/lib/bootstrap.min.js',
+    c.source.js + '/lib/instafeed.js',
+    c.source.js + '/app.js',
+    c.source.js + '/controllers/*.js',
 
-    js_dir +'/ui/instafeed.js',
-    js_dir +'/ui/modal.js',
-    js_dir +'/ui/loading.js',
-    js_dir +'/ui/polaroids.js'
+    c.source.js + '/ui/instafeed.js',
+    c.source.js + '/ui/modal.js',
+    c.source.js + '/ui/loading.js',
+    c.source.js + '/ui/polaroids.js'
   ])
     .pipe(concat('application.js'))
-    //.pipe(uglify({ mangle: false }))
-    .pipe(gulp.dest(build_dir+ '/assets'));
+    .pipe(uglify({ mangle: false }))
+    .pipe(_.dest(c.build.js));
 
   // Sourcempas
-  gulp.src(js_dir +'/lib/*.js.map').pipe(gulp.dest(build_dir+ '/assets'));
+  _.src(c.source.js +'/lib/*.js.map').pipe(_.dest(c.build.js));
 });
 
 
 // Watch
-gulp.task('watch', function () {
-  gulp.watch( scss_files, ['styles'] );
-  gulp.watch( images_dir +'/*.*', ['images'] );
-  gulp.watch( js_dir +'/**/*.*', ['scripts'] );
-  gulp.watch( 'source/*.html', ['html'] );
-  gulp.watch( 'source/views/*.html', ['html'] );
+_.task('watch', function(){
+  _.watch(c.source.sass     +'/**/*.scss',    ['styles']);
+  _.watch(c.source.images   +'/*.*',          ['images']);
+  _.watch(c.source.js       +'/**/*.*',       ['scripts']);
+  _.watch(c.source.dir      +'/**/*.html',    ['html']);
 });
 
 
 // Server
-gulp.task('connect', function () {
-  connect.server({ root: 'build', port: 3000 });
+_.task('connect', function(){
+  connect.server({root: c.build.dir, port: 3000});
 });
 
 
-// Clean
-gulp.task('clean', function() { del(['build']) });
+// Clean build folder
+_.task('clean', function(){ del( c.build.dir ) });
 
 
 // Build
-gulp.task('build', ['clean', 'html', 'styles', 'scripts', 'images', 'fonts']);
+_.task('build', ['clean', 'html', 'styles', 'scripts', 'images', 'fonts']);
 
 
 // Default
-gulp.task('default', ['build', 'connect', 'watch']);
+_.task('default', ['build', 'connect', 'watch']);

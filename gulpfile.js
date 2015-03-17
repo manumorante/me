@@ -5,6 +5,7 @@ var _             = require('gulp'),
   compass         = require('gulp-compass'),
   uglify          = require('gulp-uglify'),
   del             = require('del'),
+  include         = require('gulp-include'),
 
   c = {
     source: {
@@ -52,23 +53,10 @@ _.task('styles', function(){
 
 //  Javascript
 _.task('scripts', function(){
-  _.src([
-    c.source.js + '/lib/jquery.min.js',
-    c.source.js + '/lib/angular.min.js',
-    c.source.js + '/lib/angular-route.min.js',
-    c.source.js + '/lib/bootstrap.min.js',
-    c.source.js + '/lib/instafeed.js',
-    c.source.js + '/app.js',
-    c.source.js + '/controllers/*.js',
-
-    c.source.js + '/ui/instafeed.js',
-    c.source.js + '/ui/modal.js',
-    c.source.js + '/ui/loading.js',
-    c.source.js + '/ui/polaroids.js'
-  ])
-    .pipe(concat('application.js'))
-    .pipe(uglify({ mangle: false }))
-    .pipe(_.dest(c.build.js));
+  _.src(c.source.js + '/application.js')
+    .pipe( include() )
+    .pipe( uglify({ mangle: false }) )
+    .pipe( _.dest(c.build.js) );
 
   // Sourcempas
   _.src(c.source.js +'/lib/*.js.map').pipe(_.dest(c.build.js));

@@ -6,6 +6,8 @@ var _             = require('gulp'),
   uglify          = require('gulp-uglify'),
   del             = require('del'),
   include         = require('gulp-include'),
+  livereload      = require('gulp-livereload'),
+
 
   c = {
     source: {
@@ -47,7 +49,8 @@ _.task('fonts', function(){
 // CSS
 _.task('styles', function(){
   _.src(c.source.sass +'/application.scss')
-    .pipe(compass({config_file: c.source.dir +'/config/compass.rb', sass: c.source.sass, css: c.build.css}));
+    .pipe(compass({config_file: c.source.dir +'/config/compass.rb', sass: c.source.sass, css: c.build.css}))
+    .pipe(livereload());
 });
 
 
@@ -65,6 +68,7 @@ _.task('scripts', function(){
 
 // Watch
 _.task('watch', function(){
+  livereload.listen();
   _.watch(c.source.sass     +'/**/*.scss',    ['styles']);
   _.watch(c.source.images   +'/*.*',          ['images']);
   _.watch(c.source.js       +'/**/*.*',       ['scripts']);

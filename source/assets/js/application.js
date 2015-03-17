@@ -12,4 +12,10 @@
 //= include ui/polaroids.js
 
 // App
-//= include ui/app.js
+//= include app.js
+
+// Controllers
+//= include controllers/routes.js
+//= include controllers/main.js
+//= include controllers/header.js
+//= include controllers/polaroids.js

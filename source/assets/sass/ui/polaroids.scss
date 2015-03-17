@@ -6,7 +6,7 @@
 
 #polaroids {
   position: relative;
-  padding: $margin;
+  padding: 0;
   @include clearfix;
   text-align: center;
   pointer-events: none;

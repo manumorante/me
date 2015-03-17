@@ -4,26 +4,11 @@
 
 @import "compass";
 @import "../config";
+@import "../lib/m.breakpoints";
 
 // BORDERS
 $border-title-value: $border-title + $border;
 
-// DIMENSIONS Width and Heigh
-$width: $size;
-$height: $width + $border-title - $border;
-
-// ROTATION
-// Random Positive or Negative Number (http://stackoverflow.com/a/8771826)
-@if($rotation<=0){
-  $rotation: 0deg;
-
-} @else {
-
-  $rotation-range: ceil($rotation/3);
-  $rotation-level: random($rotation-range*2)+$rotation-range;
-  $negative-positive-value: round(random()) * 2 - 1; // get 1 or -1
-  $rotation: $rotation-level * $negative-positive-value * 1deg;
-}
 
 // Polaroid
 .polaroid {
@@ -31,9 +16,9 @@ $height: $width + $border-title - $border;
   @include inline-block;
   z-index: $z-index-polaroid;
 
-  width: $width;
-  height: $height + $border;
-  margin: $margin/2;
+  width: 100%;
+  height: auto;
+  margin: $margin-small;
   padding: $border $border $border-title-value $border;
 
   background-color: $color;
@@ -41,6 +26,10 @@ $height: $width + $border-title - $border;
 
   @include transition(transform .4s);
   @include box-shadow(0 5px 20px rgba(black, .2));
+
+  @include at-small  { width: $size-small; margin: $margin-small; }
+  @include at-medium { width: $size-medium; margin: $margin-medium; }
+  @include at-large  { width: $size-large; margin: $margin-large; }
 }
 
 // Image

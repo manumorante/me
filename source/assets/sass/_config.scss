@@ -15,14 +15,23 @@ $fa-font-path:            'FontAwesome/';
 //  # # # # # # # # # #
 
 $color:                     white;  // white default
-$size:                      306px;  // width (and height)
+
+$size-small:                46%;
+$size-medium:               30%;
+$size-large:                23%;
+
+$margin-small:              2%;
+$margin-medium:             1.6%;
+$margin-large:              1%;
+
 $border:                    15px;
-$margin:                    15px;
+
+
 $border-title:              30px;   // title's playholder (min 40px to show it)
-$rotation:                  0;      // 15deg Example: 15 => from -15 to 15deg
 $develop-time:              0s;
 
 // z-index
+$z-index-navbar:            20;
 $z-index-modal:             10;
 $z-index-loading:           11;
 $z-index-polaroid:          1;

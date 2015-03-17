@@ -90,13 +90,20 @@ _.task('connect', function(){
 });
 
 
-// Clean build folder
-_.task('clean', function(){ del( c.build.dir ) });
+// Build w/ clean
+_.task('build:clean', function(){
+  del( c.build.dir, function(err){
+    if(err){ throw err;
+    } else {
+      _.start('build');
+    }
+  })
+});
 
 
 // Build
-_.task('build', ['clean', 'html', 'styles', 'scripts', 'images', 'fonts']);
+_.task('build', ['html', 'styles', 'scripts', 'images', 'fonts']);
 
 
 // Default
-_.task('default', ['build', 'connect', 'watch']);
+_.task('default', ['build:clean', 'connect', 'watch']);

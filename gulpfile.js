@@ -6,7 +6,6 @@ var _             = require('gulp'),
   uglify          = require('gulp-uglify'),
   del             = require('del'),
   include         = require('gulp-include'),
-  livereload      = require('gulp-livereload'),
 
 
   c = {
@@ -50,7 +49,6 @@ _.task('fonts', function(){
 _.task('styles', function(){
   _.src(c.source.sass +'/application.scss')
     .pipe(compass({config_file: c.source.dir +'/config/compass.rb', sass: c.source.sass, css: c.build.css}))
-    .pipe(livereload());
 });
 
 
@@ -68,7 +66,6 @@ _.task('scripts', function(){
 
 // Watch
 _.task('watch', function(){
-  livereload.listen();
   _.watch(c.source.sass     +'/**/*.scss',    ['styles']);
   _.watch(c.source.images   +'/*.*',          ['images']);
   _.watch(c.source.js       +'/**/*.*',       ['scripts']);
@@ -84,18 +81,18 @@ _.task('connect', function(){
 
 // Build w/ clean
 _.task('build:clean', function(){
-  del( c.build.dir, function(err){
-    if(err){ throw err;
-    } else {
-      _.start('build');
-    }
+  del( c.build.dir, function(){
+    _.start('build');
   })
 });
 
 
 // Build
-_.task('build', ['html', 'styles', 'scripts', 'images', 'fonts']);
+_.task('build', ['fonts', 'html', 'scripts', 'images', 'styles']);
 
 
 // Default
-_.task('default', ['build:clean', 'connect', 'watch']);
+_.task('default', ['build:clean'], function(){
+  _.start('connect');
+  _.start('watch');
+});

@@ -4,9 +4,9 @@
  */
 var modal = function(state){
   if(state){
-    $body.addClass('modal');
+    $body.addClass('modaling');
 
   } else {
-    $body.removeClass('modal');
+    $body.removeClass('modaling');
   }
 };

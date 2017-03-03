@@ -18,11 +18,15 @@ body {
   font-family: Arial; }
 
 .logo {
-  width: 160px;
-  height: 160px;
-  margin: 2em auto;
+  width: 130px;
+  height: 130px;
+  margin: 0 auto 2em;
   border-radius: 50%;
   overflow: hidden; }
+  @media (min-width: 768px) {
+    .logo {
+      width: 160px;
+      height: 160px; } }
   .logo img {
     width: 100%; }
 
@@ -35,7 +39,29 @@ body {
   .social a:hover {
     color: #a9ddd6; }
 
-@media (min-width: 768px) {
+.title {
+  font-size: 26px;
+  line-height: 26px; }
+  @media (min-width: 768px) {
+    .title {
+      font-size: 32px;
+      line-height: 32px; } }
+
+.content {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  overflow: hidden; }
+  @media (min-width: 480px) {
+    .content {
+      top: 0; } }
+  @media (min-width: 768px) {
+    .content {
+      top: 25%; } }
+
+@media (min-width: 480px) {
   .wrap {
     display: table;
     overflow: hidden; } }
@@ -48,20 +74,12 @@ body {
   background: #eee center no-repeat;
   background-size: auto 100%;
   transition: all 0.4s ease-in-out; }
-  @media (min-width: 768px) {
+  @media (min-width: 480px) {
     .col {
       display: table-cell;
       width: 33.33333%; } }
   .col:hover {
     background-size: auto 104%; }
-
-.content {
-  position: absolute;
-  top: 25%;
-  left: 0;
-  width: 100%;
-  padding: 15px;
-  overflow: hidden; }
 
 .col-1 {
   padding: 2em;
@@ -75,10 +93,10 @@ body {
 .col-3 {
   background-image: url("https://raw.githubusercontent.com/unavezfui/welcome/gh-pages/img/photo-1447078806655-40579c2520d6.jpg"); }
 
-@media (min-width: 768px) {
+@media (min-width: 480px) {
   .close {
     width: 25%; } }
 
-@media (min-width: 768px) {
+@media (min-width: 480px) {
   .open {
     width: 50%; } }

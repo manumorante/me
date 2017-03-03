@@ -1,0 +1,67 @@
+// Grid
+
+.wrap {
+  @include at-small {
+    display: table;
+    overflow: hidden;
+  }
+}
+
+// Col
+.col {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  @include at-small {
+    display: table-cell;
+    width: $col;
+  }
+
+  vertical-align: top;
+  background: #eee center no-repeat;
+  background-size: auto 100%;
+
+  transition: all $speed $anima-type;
+
+  &:hover {
+    background-size: auto 104%;
+  }
+}
+
+// Content
+.content {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  overflow: hidden;
+}
+
+.col-1 {
+  padding: 2em;
+  background-color: #fff;
+  text-align: center;
+  color: #555;
+}
+
+.col-2 {
+  background-image: url("#{$assets}/oscar-keys-photo.jpg");
+}
+
+.col-3 {
+  background-image: url("#{$assets}/photo-1447078806655-40579c2520d6.jpg");
+}
+
+.close {
+  @include at-small {
+    width: $col-close
+  }
+}
+
+.open {
+  @include at-small {
+    width: $col-open
+  }
+}

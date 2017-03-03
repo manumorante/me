@@ -1,0 +1,72 @@
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+html,
+body,
+.wrap {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #eee; }
+
+body {
+  font-family: Arial; }
+
+.wrap {
+  display: table;
+  overflow: hidden; }
+  .wrap .col {
+    position: relative;
+    display: table-cell;
+    vertical-align: top;
+    width: 33.33333%;
+    height: 100%;
+    transition: all 0.4s ease-in-out;
+    background: #eee center no-repeat;
+    background-size: auto 100%; }
+    .wrap .col:hover {
+      background-size: auto 104%; }
+    .wrap .col .content {
+      position: absolute;
+      top: 25%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 15px;
+      overflow: hidden; }
+  .wrap .col-1 {
+    padding: 2em;
+    background-color: #fff;
+    text-align: center;
+    color: #555; }
+  .wrap .col-2 {
+    background-image: url("https://raw.githubusercontent.com/unavezfui/welcome/gh-pages/img/oscar-keys-photo.jpg"); }
+  .wrap .col-3 {
+    background-image: url("https://raw.githubusercontent.com/unavezfui/welcome/gh-pages/img/photo-1447078806655-40579c2520d6.jpg"); }
+  .wrap .logo {
+    width: 160px;
+    height: 160px;
+    margin: 2em auto;
+    border-radius: 50%;
+    overflow: hidden; }
+    .wrap .logo img {
+      width: 100%; }
+  .wrap .social a {
+    display: inline-block;
+    text-decoration: none;
+    margin: 5px;
+    color: #777;
+    font-size: 22px; }
+    .wrap .social a:hover {
+      color: #a9ddd6; }
+
+.wrap .close {
+  width: 25%; }
+
+.wrap .open {
+  width: 50%; }

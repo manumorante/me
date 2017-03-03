@@ -1,0 +1,113 @@
+// https://coolors.co/app/6e5a4d-dec4a1-f7898f-8da1b9-a9ddd6
+$colors: #6e5a4d #dec4a1 #f7898f #8da1b9 #a9ddd6;
+$assets: 'https://raw.githubusercontent.com/unavezfui/welcome/gh-pages/img';
+
+$color-primary: #a9ddd6;
+
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html,
+body,
+.wrap {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #eee;
+}
+
+$speed: .4s;
+$anima-type: ease-in-out;
+
+$cols: 3;
+$col: 100%/$cols;
+$col-open: 50%;
+$col-close: (100% - $col-open) / ($cols - 1);
+
+body {
+  font-family: Arial;
+}
+
+.wrap {
+  display: table;
+  overflow: hidden;
+
+  .col {
+    position: relative;
+    display: table-cell;
+    vertical-align: top;
+    width: $col;
+    height: 100%;
+    transition: all $speed $anima-type;
+    background: #eee center no-repeat;
+    background-size: auto 100%;
+
+    &:hover {
+      background-size: auto 104%;
+    }
+
+    .content {
+      position: absolute;
+      top: 25%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 15px;
+      overflow: hidden;
+    }
+  }
+
+  .col-1 {
+    padding: 2em;
+    background-color: #fff;
+    text-align: center;
+    color: #555;
+  }
+
+  .col-2 {
+    background-image: url("#{$assets}/oscar-keys-photo.jpg");
+  }
+
+  .col-3 {
+    background-image: url("#{$assets}/photo-1447078806655-40579c2520d6.jpg");
+  }
+
+  .logo {
+    width: 160px;
+    height: 160px;
+    margin: 2em auto;
+    border-radius: 50%;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .social a {
+    display: inline-block;
+    text-decoration: none;
+    margin: 5px;
+    color: #777;
+    font-size: 22px;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}
+
+.wrap {
+  .close {
+    width: $col-close
+  }
+  .open {
+    width: $col-open
+  }
+}

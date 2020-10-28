@@ -1,0 +1,8 @@
+.App {
+  padding: 50px;
+  min-height: 100vh;
+}
+
+.Avatar__img {
+  border-radius: 50%;
+}
